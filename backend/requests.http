@@ -1,0 +1,33 @@
+### バージョン取得
+GET http://localhost:8000/api/version
+Content-Type: application/json
+
+### MySQL -> PostgreSQL
+POST http://localhost:8000/api/sql/transpile
+Content-Type: application/json
+
+{
+    "sql": "SELECT DATE_ADD(order_date, INTERVAL 7 DAY) AS next_week FROM orders",
+    "read": "mysql",
+    "write": "postgres"
+}
+
+### DuckDB -> Hive
+POST http://localhost:8000/api/sql/transpile
+Content-Type: application/json
+
+{
+    "sql": "SELECT EPOCH_MS(1618088028295)",
+    "read": "duckdb",
+    "write": "hive"
+}
+
+### 構文エラー
+POST http://localhost:8000/api/sql/transpile
+Content-Type: application/json
+
+{
+    "sql": "SELECT foo FROM (SELECT baz FROM t",
+    "read": "mysql",
+    "write": "postgres"
+}
