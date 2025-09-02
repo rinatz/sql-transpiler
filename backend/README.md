@@ -15,5 +15,5 @@
 http://localhost:8000 でアクセスできます。
 
 ```bash
-$ uv run fastapi lambda_function.py
+$ uv run fastapi dev lambda_function.py
 ```
