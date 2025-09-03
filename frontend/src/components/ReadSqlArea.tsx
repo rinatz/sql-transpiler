@@ -12,9 +12,14 @@ export type ReadSqlAreaProps = {
   sql: string;
   error: string;
   onSqlChange: (value: string) => void;
-};
+} & React.ComponentProps<typeof Field.Root>;
 
-export function ReadSqlArea({ sql, error, onSqlChange }: ReadSqlAreaProps) {
+export function ReadSqlArea({
+  sql,
+  error,
+  onSqlChange,
+  ...props
+}: ReadSqlAreaProps) {
   const onSqlChangeFn = useCallback(
     (value: string) => {
       const handler = setTimeout(() => {
@@ -27,7 +32,7 @@ export function ReadSqlArea({ sql, error, onSqlChange }: ReadSqlAreaProps) {
   );
 
   return (
-    <Field.Root invalid={!!error} gap="1">
+    <Field.Root invalid={!!error} gap="1" {...props}>
       <Textarea
         autoresize
         rows={10}

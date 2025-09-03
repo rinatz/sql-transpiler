@@ -4,7 +4,7 @@ import {
   Heading,
   HStack,
   Separator,
-  VStack,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import { ColorModeButton } from "@/components/ui/color-mode";
 import { DialectListbox } from "@/components/DialectListbox";
@@ -20,6 +20,8 @@ export function App() {
       defaultWrite: dialects.PostgreSQL,
     });
 
+  const isBaseBreakpoint = useBreakpointValue({ base: true, md: false });
+
   return (
     <>
       <HStack justify="space-between" py="4" px="8">
@@ -32,26 +34,34 @@ export function App() {
       <Separator variant="solid" mb="8" />
 
       <Box p="4" maxW="1200px" mx="auto">
-        <Flex gap="16" justify="space-around">
-          <VStack flexBasis="50%" gap="4">
-            <DialectListbox
-              name="read"
-              defaultValue={read}
-              onValueChange={setRead}
-            />
+        <HStack
+          justify={{ base: "center", md: "space-around" }}
+          gap="8"
+          m="12px"
+        >
+          <DialectListbox
+            name="read"
+            defaultValue={read}
+            onValueChange={setRead}
+          />
+          <DialectListbox
+            name="write"
+            defaultValue={write}
+            onValueChange={setWrite}
+          />
+        </HStack>
 
-            <ReadSqlArea sql={sql} error={error} onSqlChange={setSql} />
-          </VStack>
+        <Flex justify="space-around" wrap="wrap" gap="8">
+          <ReadSqlArea
+            sql={sql}
+            error={error}
+            onSqlChange={setSql}
+            maxW={{ md: "40%" }}
+          />
 
-          <VStack flexBasis="50%" gap="4">
-            <DialectListbox
-              name="write"
-              defaultValue={write}
-              onValueChange={setWrite}
-            />
-
-            <WriteSqlArea sql={transpiledSql} />
-          </VStack>{" "}
+          {(!isBaseBreakpoint || (isBaseBreakpoint && transpiledSql)) && (
+            <WriteSqlArea sql={transpiledSql} maxW={{ md: "40%" }} />
+          )}
         </Flex>
       </Box>
     </>
