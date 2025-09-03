@@ -2,6 +2,7 @@ chakra
 dremio
 duckdb
 exasol
+Glot
 Mangum
 prql
 risingwave
