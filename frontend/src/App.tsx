@@ -14,11 +14,20 @@ import { ReadSqlArea } from "./components/ReadSqlArea";
 import { WriteSqlArea } from "./components/WriteSqlArea";
 
 export function App() {
-  const { sql, setSql, read, setRead, write, setWrite, transpiledSql, error } =
-    useSqlTranspiler({
-      defaultRead: dialects.MySQL,
-      defaultWrite: dialects.PostgreSQL,
-    });
+  const {
+    sql,
+    setSql,
+    read,
+    setRead,
+    write,
+    setWrite,
+    isLoading,
+    transpiledSql,
+    error,
+  } = useSqlTranspiler({
+    defaultRead: dialects.MySQL,
+    defaultWrite: dialects.PostgreSQL,
+  });
 
   const isBaseBreakpoint = useBreakpointValue({ base: true, md: false });
 
@@ -60,7 +69,11 @@ export function App() {
           />
 
           {(!isBaseBreakpoint || (isBaseBreakpoint && transpiledSql)) && (
-            <WriteSqlArea sql={transpiledSql} maxW={{ md: "40%" }} />
+            <WriteSqlArea
+              sql={transpiledSql}
+              isLoading={isLoading}
+              maxW={{ md: "40%" }}
+            />
           )}
         </Flex>
       </Box>

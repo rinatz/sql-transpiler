@@ -10,6 +10,7 @@ export function useSqlTranspiler({
   const [sql, setSql] = useState("");
   const [read, setRead] = useState(defaultRead || "");
   const [write, setWrite] = useState(defaultWrite || "");
+  const [isLoading, setIsLoading] = useState(false);
   const [transpiledSql, setTranspiledSql] = useState("");
   const [error, setError] = useState("");
 
@@ -35,7 +36,13 @@ export function useSqlTranspiler({
         }
       );
 
+      let loadingTimer: number | undefined;
+
       try {
+        loadingTimer = setTimeout(() => {
+          setIsLoading(true);
+        }, 300);
+
         const response = await fetch(request);
 
         if (!response.ok) {
@@ -50,6 +57,9 @@ export function useSqlTranspiler({
         setTranspiledSql(data.results[0]);
       } catch (e) {
         console.error(e);
+      } finally {
+        clearTimeout(loadingTimer);
+        setIsLoading(false);
       }
     }, 500);
 
@@ -63,6 +73,7 @@ export function useSqlTranspiler({
     setRead,
     write,
     setWrite,
+    isLoading,
     transpiledSql,
     error,
   };
