@@ -44,7 +44,8 @@ export function ReadSqlArea({
           {/* ErrorText が表示されていないときに HelperText が左寄せにならないようにするための空要素 */}
         </Box>
         <Field.HelperText>
-          {getTextLength(sql)}/{maxTextLength}
+          {getTextLength(sql).toLocaleString()} /{" "}
+          {maxTextLength.toLocaleString()}
         </Field.HelperText>
       </HStack>
     </Field.Root>
