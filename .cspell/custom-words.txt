@@ -1,0 +1,11 @@
+chakra
+dremio
+duckdb
+exasol
+Mangum
+prql
+risingwave
+singlestore
+starrocks
+teradata
+trino
