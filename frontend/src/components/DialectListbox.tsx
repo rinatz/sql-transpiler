@@ -9,6 +9,7 @@ import {
   useListbox,
 } from "@chakra-ui/react";
 import { LuChevronDown } from "react-icons/lu";
+import { dialects } from "@/constants/dialects";
 
 export type DialectListboxProps = {
   name?: string;
@@ -28,39 +29,10 @@ export function DialectListbox({
   const triggerRef = useRef<HTMLButtonElement>(null);
 
   const { collection, filter } = useListCollection({
-    initialItems: [
-      { label: "Athena", value: "athena" },
-      { label: "BigQuery", value: "bigquery" },
-      { label: "ClickHouse", value: "clickhouse" },
-      { label: "Databricks", value: "databricks" },
-      { label: "Doris", value: "doris" },
-      { label: "Dremio", value: "dremio" },
-      { label: "Drill", value: "drill" },
-      { label: "Druid", value: "druid" },
-      { label: "DuckDB", value: "duckdb" },
-      { label: "Dune", value: "dune" },
-      { label: "Exasol", value: "exasol" },
-      { label: "Fabric", value: "fabric" },
-      { label: "Hive", value: "hive" },
-      { label: "Materialize", value: "materialize" },
-      { label: "MySQL", value: "mysql" },
-      { label: "Oracle", value: "oracle" },
-      { label: "PostgreSQL", value: "postgres" },
-      { label: "Presto", value: "presto" },
-      { label: "PRQL", value: "prql" },
-      { label: "Redshift", value: "redshift" },
-      { label: "RisingWave", value: "risingwave" },
-      { label: "SingleStore", value: "singlestore" },
-      { label: "Snowflake", value: "snowflake" },
-      { label: "Spark", value: "spark" },
-      { label: "Spark2", value: "spark2" },
-      { label: "SQLite", value: "sqlite" },
-      { label: "StarRocks", value: "starrocks" },
-      { label: "Tableau", value: "tableau" },
-      { label: "Teradata", value: "teradata" },
-      { label: "Trino", value: "trino" },
-      { label: "TSQL", value: "tsql" },
-    ],
+    initialItems: Object.entries(dialects).map(([label, value]) => ({
+      label,
+      value,
+    })),
     filter: contains,
   });
 

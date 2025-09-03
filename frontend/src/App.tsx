@@ -3,12 +3,13 @@ import { ColorModeButton } from "@/components/ui/color-mode";
 import { useSqlTranspiler } from "@/hooks/useSqlTranspiler";
 import { ReadSqlArea } from "./components/ReadSqlArea";
 import { WriteSqlArea } from "./components/WriteSqlArea";
+import { dialects } from "./constants/dialects";
 
 export function App() {
   const { sql, setSql, read, setRead, write, setWrite, transpiledSql, error } =
     useSqlTranspiler({
-      defaultRead: "mysql",
-      defaultWrite: "postgres",
+      defaultRead: dialects.MySQL,
+      defaultWrite: dialects.PostgreSQL,
     });
 
   return (
