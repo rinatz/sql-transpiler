@@ -7,6 +7,8 @@ import {
   useFilter,
   useListCollection,
   useListbox,
+  HStack,
+  Box,
 } from "@chakra-ui/react";
 import { LuChevronDown } from "react-icons/lu";
 import { dialects } from "@/constants/dialects";
@@ -57,9 +59,11 @@ export function DialectListbox({
   return (
     <Popover.Root open={open} onOpenChange={(e) => setOpen(e.open)}>
       <Popover.Trigger asChild>
-        <Button size="sm" ref={triggerRef} variant="outline" w="120px">
-          {selectedItem ? selectedItem.label : "Select dialect"}{" "}
-          <LuChevronDown />
+        <Button size="sm" ref={triggerRef} variant="outline" w="140px">
+          <HStack justify="space-between" w="100%">
+            <Box>{selectedItem ? selectedItem.label : "Select dialect"}</Box>
+            <LuChevronDown />
+          </HStack>
         </Button>
       </Popover.Trigger>
 

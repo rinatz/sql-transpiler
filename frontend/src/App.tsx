@@ -46,7 +46,7 @@ export function App() {
         <HStack
           justify={{ base: "center", md: "space-around" }}
           gap="8"
-          m="12px"
+          mb="12px"
         >
           <DialectListbox
             name="read"
