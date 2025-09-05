@@ -9,8 +9,7 @@ import sqlglot
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
-    api_token: str = ""
-    verify_api_token: bool = True
+    enable_cors: bool = False
 
 
 settings = Settings()
@@ -23,26 +22,14 @@ class TranspileRequest(BaseModel):
     write: str
 
 
-@app.middleware("http")
-async def verify_api_token(request: Request, call_next):
-    if not settings.verify_api_token:
-        return await call_next(request)
-
-    if request.headers.get("X-From-CloudFront") != settings.api_token:
-        return JSONResponse({"error": "Forbidden"}, status_code=403)
-
-    return await call_next(request)
-
-
-# verify_api_token の前に CORS ミドルウェアを実行するために
-# verify_api_token の後に記述すること
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+if settings.enable_cors:
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
 
 @app.exception_handler(sqlglot.ParseError)
