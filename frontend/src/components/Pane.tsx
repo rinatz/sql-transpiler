@@ -38,7 +38,7 @@ export function Pane() {
   });
 
   return (
-    <Box p="4" maxW="1200px" mx="auto">
+    <Box p="4" w="100%" maxW="1200px" flex="1" alignSelf="center">
       <HStack
         justify={{ base: "center", lg: "space-around" }}
         gap="8"

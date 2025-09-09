@@ -4,7 +4,7 @@ declare const VITE_APP_VERSION: string;
 
 export function Footer() {
   return (
-    <Text w="100%" textAlign="center" position="fixed" bottom="16px">
+    <Text w="100%" textAlign="center" my={4}>
       {`version ${VITE_APP_VERSION}, powered by `}
       <Link
         href="https://sqlglot.com/sqlglot.html"
