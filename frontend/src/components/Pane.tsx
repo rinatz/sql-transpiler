@@ -13,7 +13,7 @@ export function Pane() {
     setRead,
     write,
     setWrite,
-    isLoading,
+    loading,
     transpiledSql,
     error,
   } = useSqlTranspiler({
@@ -61,7 +61,7 @@ export function Pane() {
 
         <WriteSqlArea
           sql={transpiledSql}
-          isLoading={isLoading}
+          loading={loading}
           maxW={maxW}
           hidden={hidden}
         />

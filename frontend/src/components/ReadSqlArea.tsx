@@ -1,4 +1,4 @@
-import { Box, Field, HStack, Textarea } from "@chakra-ui/react";
+import { Field, HStack, Textarea } from "@chakra-ui/react";
 import { useCallback } from "react";
 
 const maxTextLength = 5000;
@@ -40,10 +40,12 @@ export function ReadSqlArea({
       />
       <HStack justify="space-between" width="100%">
         <Field.ErrorText>{error}</Field.ErrorText>
-        <Box>
-          {/* ErrorText が表示されていないときに HelperText が左寄せにならないようにするための空要素 */}
-        </Box>
-        <Field.HelperText>
+        <Field.HelperText
+          textWrap="nowrap"
+          textAlign="end"
+          alignSelf="start"
+          flex="1"
+        >
           {getTextLength(sql).toLocaleString()} /{" "}
           {maxTextLength.toLocaleString()}
         </Field.HelperText>

@@ -2,16 +2,15 @@ import { Field, HStack, Skeleton, Textarea } from "@chakra-ui/react";
 
 export type WriteSqlAreaProps = {
   sql: string;
-  isLoading: boolean;
+  loading: boolean;
 } & React.ComponentProps<typeof Field.Root>;
 
-export function WriteSqlArea({ sql, isLoading, ...props }: WriteSqlAreaProps) {
+export function WriteSqlArea({ sql, loading, ...props }: WriteSqlAreaProps) {
   return (
     <Field.Root gap="1" {...props}>
-      {isLoading ? (
-        <Skeleton w="100%" h="90%" />
-      ) : (
+      <Skeleton loading={loading} w="100%">
         <Textarea
+          w="100%"
           autoresize
           rows={10}
           value={sql}
@@ -20,7 +19,7 @@ export function WriteSqlArea({ sql, isLoading, ...props }: WriteSqlAreaProps) {
           readOnly
           _hover={{ cursor: "default" }}
         />
-      )}
+      </Skeleton>
 
       {/* <ReadSqlArea>と高さを揃えるために入れておく */}
       <HStack>
