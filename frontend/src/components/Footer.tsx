@@ -10,6 +10,7 @@ export function Footer() {
         href="https://sqlglot.com/sqlglot.html"
         color="blue.500"
         target="_blank"
+        rel="noopener"
       >
         SQLGlot
       </Link>
