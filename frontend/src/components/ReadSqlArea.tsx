@@ -38,7 +38,7 @@ export function ReadSqlArea({
         rows={10}
         onChange={(e) => onSqlChangeFn(e.target.value)}
       />
-      <HStack justify="space-between" width="100%">
+      <HStack justify="space-between" width="100%" px="1">
         <Field.ErrorText>{error}</Field.ErrorText>
         <Field.HelperText
           textWrap="nowrap"
